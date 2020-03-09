@@ -1,8 +1,8 @@
-musics#top
+homes#top
 <% if user_signed_in? %>
 <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
 ログイン中
-<%= link_to 'アバウト', musics_about_path %>
+<%= link_to 'アバウト', homes_about_path %>
 <% else %>
 <%= link_to 'ログイン', new_user_session_path %>
 ログアウト中

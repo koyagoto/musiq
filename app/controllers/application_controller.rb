@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   private
   # サインイン後のリダイレクト先
   def after_sign_in_path_for(resource)
-      root_path
+      musics_path
   end
 
   # サインアウト後のリダイレクト先
