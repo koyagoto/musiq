@@ -1,0 +1,37 @@
+musics#new
+
+<h2>New Post</h2>
+      <%= form_for(@music) do |f| %>
+
+          <h5>アルバム画像</h5>
+          <%= f.attachment_field :album_image %>
+       
+          <h5>アーティスト名</h5>
+          <%= f.text_field :singer,placeholder: "アーティスト名入力" %>
+       
+          <h5>アルバム名</h5>
+          <%= f.text_field :album,placeholder: "アルバム名入力" %>
+
+          <!-- 評価 -->
+          <div class="form-group row" id="star">
+            <%= f.label :rate,'評価', class:'col-md-3 col-form-label' %>
+            <%= f.hidden_field :rate, id: :review_star %>
+          </div>
+
+          <!-- 評価javascript -->
+          <script>
+          $('#star').raty({
+            size     : 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            scoreName: 'music[rate]',
+            half: true,
+          });
+          </script>
+       
+          <h5>レビュー内容</h5>
+          <%= f.text_area :introduction,placeholder: "レビュー内容" %>
+
+          <%= f.submit '投稿する' %>
+      <% end %>

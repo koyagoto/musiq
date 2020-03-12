@@ -39,7 +39,10 @@ ActiveRecord::Schema.define(version: 2020_03_09_060245) do
   create_table "musics", force: :cascade do |t|
     t.string "singer"
     t.string "album"
+    t.string "album_image_id"
     t.text "introduction"
+    t.integer "user_id"
+    t.float "rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

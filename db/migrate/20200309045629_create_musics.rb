@@ -4,7 +4,10 @@ class CreateMusics < ActiveRecord::Migration[5.2]
 
       t.string :singer
       t.string :album
+      t.string :album_image_id
       t.text :introduction
+      t.integer :user_id
+      t.float :rate
 
 
       t.timestamps
