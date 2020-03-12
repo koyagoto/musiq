@@ -4,7 +4,12 @@ musics#new
       <%= form_for(@music) do |f| %>
 
           <h5>アルバム画像</h5>
-          <%= f.attachment_field :album_image %>
+          <div id="image_view"></div>
+          <%= attachment_image_tag @music, :album_image, :fill, 50, 50, fallback: "no_image.jpg", id:"orgin_img" %>
+
+          <label for="image_btn">
+            <%= f.attachment_field :album_image, id: "image_btn" %>
+          </label>
        
           <h5>アーティスト名</h5>
           <%= f.text_field :singer,placeholder: "アーティスト名入力" %>
@@ -35,3 +40,38 @@ musics#new
 
           <%= f.submit '投稿する' %>
       <% end %>
+
+      <script>
+      $(function() {
+          $('#image_btn').on('change', function(e) {
+              // 1枚だけ表示する
+              var file = e.target.files[0];
+              console.log(file);
+              if ( !file ){
+                  $('#image_view').html("");
+                  $('#orgin_img').show();
+                  return;
+              }
+              // ファイルリーダー作成
+              var fileReader = new FileReader();
+              if (file.type == 'video/mp4') {
+                  var dom = $("<video>");
+              }
+              else{
+                  var dom = $("<img>");
+              }
+              dom.attr('style','width:20%');
+              fileReader.onload = function() {
+                  // Data URIを取得
+                  console.log(this.result);
+                  var dataUri = this.result;
+                  dom.attr('src', dataUri);
+                  // img要素に表示
+                  $('#image_view').html(dom);
+              }
+              // ファイルをData URIとして読み込む
+              fileReader.readAsDataURL(file);
+              $('#orgin_img').hide();
+          });
+      });
+      </script>
