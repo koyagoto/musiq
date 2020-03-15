@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2020_03_09_060245) do
     t.text "introduction"
     t.integer "user_id"
     t.float "rate"
+    t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -11,6 +11,7 @@ musics#index ログイン中
               <th>アーティスト</th>
               <th>アルバム</th>
               <th>評価</th>
+              <th>url</th>
             </tr>
           </thead>
           <tbody>
@@ -38,6 +39,7 @@ musics#index ログイン中
                 <!--/星評価-->
                 <%= music.rate %>
                 </td>
+                <td><%= raw Rinku.auto_link(h(music.url)) %></td>
               </tr>
             <%end%>
           </tbody>
