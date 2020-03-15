@@ -8,6 +8,7 @@ class CreateMusics < ActiveRecord::Migration[5.2]
       t.text :introduction
       t.integer :user_id
       t.float :rate
+      t.string :url
 
 
       t.timestamps
