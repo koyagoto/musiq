@@ -8,6 +8,11 @@ class MusicsController < ApplicationController
 		@music = Music.new
 	end
 
+	def show
+		@music = Music.find(params[:id])
+        @user = @music.user
+	end
+
 	def create
 	    @music = Music.new(music_params)
 	    @music.user_id = current_user.id
@@ -19,7 +24,7 @@ class MusicsController < ApplicationController
 	end
 
 	def edit
-		@music = MUsic.find(params[:id])
+		@music = Music.find(params[:id])
 	end
 
 	def update

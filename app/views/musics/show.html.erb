@@ -1,1 +1,26 @@
 music#show
+<div class='col-xs-9'>
+      <h2>album detail</h2>
+      <table class="table table-striped" border="1">
+        <tbody>
+              <tr>
+                <td><%= link_to user_path(@music.user) do %>
+                        <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: 'no_image.jpeg' , size:'50x50' %>
+                        <%= @user.name %>
+                    <% end %>
+                </td>
+                <td>
+                    <%= attachment_image_tag @music, :album_image, :fill, 40, 40, format: 'jpg',fallback: "no_image.jpg" ,size:'50x50'%>
+                </td>
+                <td><%= @music.album %></td>
+                <td><%= @music.singer %></td>
+                <td><%= @music.introduction %></td>
+                <% if user_signed_in? && @music.user_id == current_user.id %>
+                <td><%= link_to 'Edit', edit_music_path(@music), class: "btn btn-primary" %></td>
+                <td><%= link_to 'Destroy', music_path(@music), method: :delete, "data-confirm" => "Are you sure?", class: "btn btn-danger" %></td>
+              </tr>
+                <% end %>
+        </tbody>
+      </table>
+      <%= link_to "Back",musics_path %>
+</div>
