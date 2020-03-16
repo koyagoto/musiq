@@ -1,2 +1,84 @@
 music#edit
 
+<h2>New Post</h2>
+      <%= form_for(@music) do |f| %>
+
+          <h5>アルバム画像</h5>
+          <div id="image_view"></div>
+          <%= attachment_image_tag @music, :album_image, :fill, 250, 250, fallback: "no_image.jpg", id:"orgin_img" %>
+
+          <label for="image_btn">
+            <%= f.attachment_field :album_image, id: "image_btn" %>
+          </label>
+       
+          <h5>アーティスト名</h5>
+          <%= f.text_field :singer,placeholder: "アーティスト名入力" %>
+       
+          <h5>アルバム名</h5>
+          <%= f.text_field :album,placeholder: "アルバム名入力" %>
+
+          <!-- 評価 -->
+          <div class="form-group row" id="star">
+            <%= f.label :rate,'評価', class:'col-md-1 col-form-label' %>
+            <%= f.hidden_field :rate, id: :review_star %>
+          </div>
+
+          <!-- 評価javascript -->
+          <script>
+          $('#star').raty({
+            size     : 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            scoreName: 'music[rate]',
+            half: true,
+          });
+          </script>
+
+          <h5>購入先またはYouTubeのURL</h5>
+          <%= f.text_area :url,placeholder: "URL入力" %>
+       
+          <h5>レビュー内容</h5>
+          <%= f.text_area :introduction,placeholder: "レビュー内容" %>
+
+          <%= f.submit '投稿する' %>
+      <% end %>
+
+      <script>
+      $(function() {
+          $('#image_btn').on('change', function(e) {
+              // 1枚だけ表示する
+              var file = e.target.files[0];
+              console.log(file);
+              if ( !file ){
+                  $('#image_view').html("");
+                  $('#orgin_img').show();
+                  return;
+              }
+              // ファイルリーダー作成
+              var fileReader = new FileReader();
+              if (file.type == 'video/mp4') {
+                  var dom = $("<video>");
+              }
+              else{
+                  var dom = $("<img>");
+              }
+              dom.attr('style','width:20%');
+              fileReader.onload = function() {
+                  // Data URIを取得
+                  console.log(this.result);
+                  var dataUri = this.result;
+                  dom.attr('src', dataUri);
+                  // img要素に表示
+                  $('#image_view').html(dom);
+              }
+              // ファイルをData URIとして読み込む
+              fileReader.readAsDataURL(file);
+              $('#orgin_img').hide();
+          });
+      });
+      </script>
+
+<%= link_to "Show",music_path %>
+|
+<%= link_to "Back",musics_path %>
