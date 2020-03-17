@@ -2,6 +2,16 @@ music#show
 <div class='col-xs-9'>
       <h2>album detail</h2>
       <table class="table table-striped" border="1">
+        <thead>
+          <tr>
+            <th>ユーザー</th>
+            <th>ジャケット</th>
+            <th>アルバム</th>
+            <th>アーティスト</th>
+            <th>ジャンル</th>
+            <th>コメント</th>
+          </tr>
+        </thead>
         <tbody>
               <tr>
                 <td><%= link_to user_path(@music.user) do %>
@@ -14,6 +24,7 @@ music#show
                 </td>
                 <td><%= @music.album %></td>
                 <td><%= @music.singer %></td>
+                <td><%= @music.genre.name %></td>
                 <td><%= @music.introduction %></td>
                 <% if user_signed_in? && @music.user_id == current_user.id %>
                 <td><%= link_to 'Edit', edit_music_path(@music), class: "btn btn-primary" %></td>

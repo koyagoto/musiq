@@ -9,6 +9,7 @@ class CreateMusics < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.float :rate
       t.string :url
+      t.integer :genre_id
 
 
       t.timestamps
