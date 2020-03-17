@@ -2,6 +2,18 @@ class MusicsController < ApplicationController
 
 	def index
 		@musics = Music.all
+		if params[:genre_id]
+	      # Genreのデータベースのテーブルから一致するidを取得
+	      @genre = Genre.find(params[:genre_id])
+	      # genre_idと紐づく投稿を取得
+	      @musics = @genre.musics.all
+	      
+	    else
+	      # 投稿すべてを取得
+	      @musics = Music.all
+	      
+	    end
+	    @genres = Genre.all
 	end
 
 	def new
@@ -44,6 +56,6 @@ class MusicsController < ApplicationController
 
 	private
     def music_params
-        params.require(:music).permit(:singer, :album, :album_image, :introduction, :user_id, :rate, :url)
+        params.require(:music).permit(:singer, :album, :album_image, :introduction, :user_id, :rate, :url, :genre_id)
     end
 end

@@ -17,9 +17,12 @@ musics#new
           <h5>アルバム名</h5>
           <%= f.text_field :album,placeholder: "アルバム名入力" %>
 
+          <h5>ジャンル</h5>
+          <%= f.collection_select :genre_id, Genre.all, :id, :name, :include_blank => "-- 選択してください --" %>
+
           <!-- 評価 -->
           <div class="form-group row" id="star">
-            <%= f.label :rate,'評価', class:'col-md-3 col-form-label' %>
+            <%= f.label :rate,'評価', class:'col-md-1 col-form-label' %>
             <%= f.hidden_field :rate, id: :review_star %>
           </div>
 

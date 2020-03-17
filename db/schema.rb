@@ -23,15 +23,7 @@ ActiveRecord::Schema.define(version: 2020_03_09_060245) do
   end
 
   create_table "genres", force: :cascade do |t|
-    t.string "jpop"
-    t.string "soul"
-    t.string "jazz"
-    t.string "dance"
-    t.string "alternative"
-    t.string "classic"
-    t.string "hiphop"
-    t.string "rock"
-    t.string "reggae"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -44,6 +36,7 @@ ActiveRecord::Schema.define(version: 2020_03_09_060245) do
     t.integer "user_id"
     t.float "rate"
     t.string "url"
+    t.integer "genre_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
