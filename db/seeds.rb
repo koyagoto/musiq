@@ -13,7 +13,7 @@ end
 
 Genre.create do |a|
   a.id = 2
-  a.name = 'Soul'
+  a.name = 'Soul/R&B'
 end
 
 Genre.create do |a|

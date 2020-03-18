@@ -1,3 +1,6 @@
+<div class="body">
+  <div class="container">
+
 music#show
 <div class='col-xs-9'>
       <h2>album detail</h2>
@@ -10,6 +13,9 @@ music#show
             <th>アーティスト</th>
             <th>ジャンル</th>
             <th>コメント</th>
+            <th>視聴先URL</th>
+            <th>編集する</th>
+            <th>削除する</th>
           </tr>
         </thead>
         <tbody>
@@ -26,6 +32,7 @@ music#show
                 <td><%= @music.singer %></td>
                 <td><%= @music.genre.name %></td>
                 <td><%= @music.introduction %></td>
+                <td><%= Rinku.auto_link(@music.url, :all, 'target="_blank"').html_safe %></td>
                 <% if user_signed_in? && @music.user_id == current_user.id %>
                 <td><%= link_to 'Edit', edit_music_path(@music), class: "btn btn-primary" %></td>
                 <td><%= link_to 'Destroy', music_path(@music), method: :delete, "data-confirm" => "Are you sure?", class: "btn btn-danger" %></td>
@@ -34,4 +41,7 @@ music#show
         </tbody>
       </table>
       <%= link_to "Back",musics_path %>
+</div>
+
+  </div>
 </div>
