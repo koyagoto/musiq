@@ -13,5 +13,16 @@
  *= require_tree .
  *= require_self
  */
+
+ footer {
+  margin-top: auto;
+  font-family: Trebuchet MS;
+  font-size: 15px;
+  color: #FFFFFF;
+  background-color: #5e665e;
+  text-align: center;
+  padding: 50px 0;
+}
+
 @import "bootstrap-sprockets";
 @import "bootstrap";

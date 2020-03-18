@@ -1,8 +1,12 @@
+<div class="body">
+  <div class="container">
+
 musics#index ログイン中
 
 <%= link_to '新規投稿', new_music_path %>
 <%= link_to 'ユーザー一覧', users_path %>
 <%= link_to " ログアウト", destroy_user_session_path,method: :delete %>
+<%= link_to 'マイページ', user_path(current_user) %>
 <div class='col-xs-2'>
 <table class="table table-striped">
     <thead>
@@ -29,7 +33,6 @@ musics#index ログイン中
               <th>アーティスト</th>
               <th>アルバム</th>
               <th>評価</th>
-              <th>視聴先url</th>
             </tr>
           </thead>
           <tbody>
@@ -57,11 +60,11 @@ musics#index ログイン中
                 <!--/星評価-->
                 <%= music.rate %>
                 </td>
-                <td><%= Rinku.auto_link(music.url, :all, 'target="_blank"').html_safe %></td>
               </tr>
             <%end%>
           </tbody>
         </table>
     </div>
-
+  </div>
+</div>
 
