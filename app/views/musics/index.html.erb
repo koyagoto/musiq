@@ -4,9 +4,6 @@
 musics#index ログイン中
 
 <%= link_to '新規投稿', new_music_path %>
-<%= link_to 'ユーザー一覧', users_path %>
-<%= link_to " ログアウト", destroy_user_session_path,method: :delete %>
-<%= link_to 'マイページ', user_path(current_user) %>
 <div class='col-xs-2'>
 <table class="table table-striped">
     <thead>
@@ -33,6 +30,7 @@ musics#index ログイン中
               <th>アーティスト</th>
               <th>アルバム</th>
               <th>評価</th>
+              <th>コメント</th>
             </tr>
           </thead>
           <tbody>
@@ -59,6 +57,9 @@ musics#index ログイン中
                   </script>
                 <!--/星評価-->
                 <%= music.rate %>
+                </td>
+                <td>
+                <%=  "#{music.comments.count} コメント" %>
                 </td>
               </tr>
             <%end%>

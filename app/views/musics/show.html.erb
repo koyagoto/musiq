@@ -2,6 +2,7 @@
   <div class="container">
 
 music#show
+<div class="row">
 <div class='col-xs-9'>
       <h2>album detail</h2>
       <table class="table table-striped" border="1">
@@ -14,8 +15,6 @@ music#show
             <th>ジャンル</th>
             <th>コメント</th>
             <th>視聴先URL</th>
-            <th>編集する</th>
-            <th>削除する</th>
           </tr>
         </thead>
         <tbody>
@@ -33,15 +32,40 @@ music#show
                 <td><%= @music.genre.name %></td>
                 <td><%= @music.introduction %></td>
                 <td><%= Rinku.auto_link(@music.url, :all, 'target="_blank"').html_safe %></td>
-                <% if user_signed_in? && @music.user_id == current_user.id %>
-                <td><%= link_to 'Edit', edit_music_path(@music), class: "btn btn-primary" %></td>
-                <td><%= link_to 'Destroy', music_path(@music), method: :delete, "data-confirm" => "Are you sure?", class: "btn btn-danger" %></td>
               </tr>
-                <% end %>
         </tbody>
       </table>
-      <%= link_to "Back",musics_path %>
+</div>
 </div>
 
-  </div>
+<div class="row">
+
+      <div class="comment-list bt style-2" id="comments">
+              <h2 class="comment-count"><%= @music.comments.count %>件コメント</h2>
+              <% @music.comments.each do |comment| %>
+                      <%= attachment_image_tag comment.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+                      <%= comment.user.name %>
+                      <%= comment.created_at.strftime('%Y/%m/%d') %>
+                      <%= comment.comment %>
+              <% end %>
+          </div>
+
+          <div class="section-title-wrapper style-1 v1 mt-30" id="divAddComment">
+            <h3 class="section-title left">
+              <span>コメント</span>
+            </h3>
+          </div>
+          <%= form_for [@music, @comment] do |f| %>
+          <div class="row">
+             <div class="col-sm-12">
+             <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+             </div>
+          </div>
+          <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+          <% end %>
+
+
+      <%= link_to "Back",musics_path %>
+    </div>
+
 </div>
