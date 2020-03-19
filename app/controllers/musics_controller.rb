@@ -7,11 +7,11 @@ class MusicsController < ApplicationController
 	      @genre = Genre.find(params[:genre_id])
 	      # genre_idと紐づく投稿を取得
 	      @musics = @genre.musics.all
-	      
+
 	    else
 	      # 投稿すべてを取得
 	      @musics = Music.all
-	      
+
 	    end
 	    @genres = Genre.all
 	end
@@ -22,6 +22,7 @@ class MusicsController < ApplicationController
 
 	def show
 		@music = Music.find(params[:id])
+        @comment = Comment.new
         @user = @music.user
 	end
 

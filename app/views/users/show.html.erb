@@ -3,9 +3,8 @@
 
 user#show
                 <div class='col-xs-3'>
-                    <h1>users show</h1>
                 <h1>User info</h1>
-                        <%= attachment_image_tag @user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpeg" ,size:'150x150'%>
+                        <%= attachment_image_tag @user, :profile_image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpeg" ,size:'150x150'%>
                     <table class="table">
                         <tr>
                             <td><p>name</p></td>
@@ -41,6 +40,10 @@ user#show
                                     </td>
                                 <td><%= link_to music.album,music_path(music) %></td>
                                 <td><%= music.singer %></td>
+                                <% if user_signed_in? && music.user_id == current_user.id %>
+                                <td><%= link_to 'Edit', edit_music_path(music), class: "btn btn-primary" %></td>
+                                <td><%= link_to 'Destroy', music_path(music), method: :delete, "data-confirm" => "Are you sure?", class: "btn btn-danger" %></td>
+                                <% end %>
                               </tr>
                             <% end %>
                         </tbody>

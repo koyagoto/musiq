@@ -14,14 +14,29 @@
  *= require_self
  */
 
+ .header-text {
+  position: absolute;
+  top: 3px;
+  left: 1200px;
+  height:100%;
+  width: 100%;
+}
+
+body,
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
  footer {
   margin-top: auto;
   font-family: Trebuchet MS;
   font-size: 15px;
-  color: #FFFFFF;
-  background-color: #5e665e;
+  color: #696969;
+  background-color: #f5f5f5;
   text-align: center;
-  padding: 50px 0;
+  padding: 15px 0;
 }
 
 @import "bootstrap-sprockets";

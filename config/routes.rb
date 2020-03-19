@@ -4,8 +4,12 @@ Rails.application.routes.draw do
 
   root 'homes#top'
   get  'homes/about' => 'homes#about'
-  
-  resources :musics
+
+  resources :musics do
+  	resource :favorites, only: [:create, :destroy]
+  	resource :comments, only: [:create]
+  end
+
   resources :users
 
 end
