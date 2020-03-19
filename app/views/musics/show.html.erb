@@ -38,8 +38,26 @@ music#show
 </div>
 </div>
 
-<div class="row">
+<!-- いいね機能 -->
+<% if @music.favorited_by?(current_user) %>
+  <li>
+    <%= link_to music_favorites_path(@music), method: :delete do %>
+      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+      <%= @music.favorites.count %> いいね
+    <% end %>
+  </li>
+<% else %>
+  <li>
+    <%= link_to music_favorites_path(@music), method: :post do %>
+      <i class="fa fa-heart-o" aria-hidden="true"></i>
+      <%= @music.favorites.count %> いいね
+    <% end %>
+  </li>
+<% end %>
+<!-- ここまで -->
 
+<!-- コメント機能 -->
+<div class="row">
       <div class="comment-list bt style-2" id="comments">
               <h2 class="comment-count"><%= @music.comments.count %>件コメント</h2>
               <% @music.comments.each do |comment| %>
@@ -66,6 +84,8 @@ music#show
 
 
       <%= link_to "Back",musics_path %>
-    </div>
+</div>
+<!-- ここまで -->
 
+</div>
 </div>

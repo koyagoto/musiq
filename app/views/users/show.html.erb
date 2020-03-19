@@ -3,9 +3,8 @@
 
 user#show
                 <div class='col-xs-3'>
-                    <h1>users show</h1>
                 <h1>User info</h1>
-                        <%= attachment_image_tag @user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpeg" ,size:'150x150'%>
+                        <%= attachment_image_tag @user, :profile_image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpeg" ,size:'150x150'%>
                     <table class="table">
                         <tr>
                             <td><p>name</p></td>
@@ -30,8 +29,6 @@ user#show
                                 <th>ジャケット</th>
                                 <th>アルバム</th>
                                 <th>アーティスト</th>
-                                <th>編集する</th>
-                                <th>削除する</th>
                             </tr>
                         </thead>
                         <tbody>
