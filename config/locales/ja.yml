@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    models:
+      music: "ミュージック"
+      user: "ユーザー"
+    attributes:
+      music:
+        singer: "アーティスト名"
+        album: "アルバム名"
+        rate: "評価"
+        url: "URL"
+        introduction: "レビュー内容"
+        genre: "ジャンル"
+      user:
+        name: "名前"

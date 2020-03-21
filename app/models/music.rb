@@ -8,4 +8,9 @@ class Music < ApplicationRecord
         def favorited_by?(user)
           favorites.where(user_id: user.id).exists?
         end
+    validates :singer, presence: true
+    validates :album, presence: true
+    validates :rate, presence: true
+    validates :url, presence: true
+    validates :introduction, presence: true
 end
