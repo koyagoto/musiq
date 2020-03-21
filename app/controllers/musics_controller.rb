@@ -1,5 +1,7 @@
 class MusicsController < ApplicationController
 
+	before_action :authenticate_user!
+
 	def index
 		@musics = Music.all
 		if params[:genre_id]

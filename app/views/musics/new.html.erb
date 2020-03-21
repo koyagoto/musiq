@@ -3,6 +3,17 @@
 
 musics#new
 
+    <% if @music.errors.any? %>
+      <div id="error_explanation">
+        <h3><%= @music.errors.count %> 件のエラーがあります:</h3>
+        <ul>
+          <% @music.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
 <h2>New Post</h2>
       <%= form_for(@music) do |f| %>
 
