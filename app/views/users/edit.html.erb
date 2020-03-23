@@ -25,7 +25,7 @@ user#edit
 			    <div>
 			        <h5>画像</h5>
 			          <div id="image_view"></div>
-			          <%= attachment_image_tag @music, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", id:"orgin_img" %>
+			          <%= attachment_image_tag @user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", id:"orgin_img" %>
 
 			          <label for="image_btn">
 			          <%= f.attachment_field :profile_image, id: "image_btn" %>
