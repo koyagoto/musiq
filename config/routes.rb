@@ -4,9 +4,10 @@ Rails.application.routes.draw do
 
   root 'homes#top'
   get  'homes/about' => 'homes#about'
+  post   '/favorite/:music_id' => 'favorites#favorite',   as: 'favorite'
+  delete '/favorite/:music_id' => 'favorites#unfavorite', as: 'unfavorite'
 
   resources :musics do
-  	resource :favorites, only: [:create, :destroy]
   	resource :comments, only: [:create]
   end
 

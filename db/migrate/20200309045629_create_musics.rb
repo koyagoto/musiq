@@ -10,6 +10,7 @@ class CreateMusics < ActiveRecord::Migration[5.2]
       t.float :rate
       t.string :url
       t.integer :genre_id
+      t.integer :favorites_count
 
 
       t.timestamps
