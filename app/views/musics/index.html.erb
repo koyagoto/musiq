@@ -1,32 +1,17 @@
 <div class="body">
   <div class="container">
 
-musics#index ログイン中
+<button type="button" class="btn btn-default btn-lg"><%= link_to '新規投稿', new_music_path %></button>
 
-<%= link_to '新規投稿', new_music_path %>
-<div class='col-xs-2'>
-<table class="table table-striped">
-    <thead>
-      <tr>
-        <th>ジャンル検索</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @genres.each do |genre| %>
-        <tr>
-          <td><%= link_to genre.name, "/musics?genre_id=#{genre.id}" %></td>
-        </tr>
-      <% end %>
-    </tbody>
-</table>
-</div>
+
+<%= render '/musics/genre', genres: @genres %>
 
 <div class='col-xs-10'>
-      <h2>musics</h2>
-      <table class="table table-striped" border="1">
+      <h2>Musics</h2>
+      <table class="table table-hover">
           <thead>
             <tr>
-              <th>画像</th>
+              <th>ジャケット</th>
               <th>アーティスト</th>
               <th>アルバム</th>
               <th>評価</th>
@@ -37,7 +22,7 @@ musics#index ログイン中
             <% @musics.each do |music|%>
               <tr>
                 <td>
-                    <%= attachment_image_tag music, :album_image, :fill, 150, 150, format: 'jpg',fallback: "no_image.jpg" ,size:'50x50'%>
+                    <%= attachment_image_tag music, :album_image, :fill, 150, 150, format: 'jpg',fallback: "no_image.jpg" ,size:'100x100'%>
                 </td>
                 <td><%= music.singer %></td>
                 <td><%= link_to music.album,music_path(music) %></td>
@@ -56,7 +41,6 @@ musics#index ログイン中
                   });
                   </script>
                 <!--/星評価-->
-                <%= music.rate %>
                 </td>
                 <td>
                 <%=  "#{music.comments.count} コメント" %>
@@ -65,6 +49,7 @@ musics#index ログイン中
             <%end%>
           </tbody>
         </table>
+        <%= paginate @musics %>
     </div>
   </div>
 </div>

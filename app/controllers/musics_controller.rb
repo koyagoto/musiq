@@ -3,19 +3,17 @@ class MusicsController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@musics = Music.all
 		if params[:genre_id]
 	      # Genreのデータベースのテーブルから一致するidを取得
 	      @genre = Genre.find(params[:genre_id])
 	      # genre_idと紐づく投稿を取得
-	      @musics = @genre.musics.all
-
+	      @musics = @genre.musics.order(created_at: :desc).page(params[:page]).per(3)
 	    else
 	      # 投稿すべてを取得
-	      @musics = Music.all
+	      @musics = Music.order(created_at: :desc).page(params[:page]).per(3)
 
 	    end
-	    @genres = Genre.all
+	      @genres = Genre.all
 	end
 
 	def new

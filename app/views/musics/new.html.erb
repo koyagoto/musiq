@@ -1,8 +1,6 @@
 <div class="body">
   <div class="container">
 
-musics#new
-
     <% if @music.errors.any? %>
       <div id="error_explanation">
         <h3><%= @music.errors.count %> 件のエラーがあります:</h3>
@@ -14,52 +12,54 @@ musics#new
       </div>
     <% end %>
 
-<h2>New Post</h2>
+<h2 align="center">アルバム投稿</h2>
       <%= form_for(@music) do |f| %>
-
-          <h5>アルバム画像</h5>
-          <div id="image_view"></div>
-          <%= attachment_image_tag @music, :album_image, :fill, 50, 50, fallback: "no_image.jpg", id:"orgin_img" %>
-
-          <label for="image_btn">
+      <div class="row">
+            <b>アルバム画像</b>
+            <div id="image_view"></div>
+            <%= attachment_image_tag @music, :album_image, :fill, 250, 250, fallback: "no_image.jpg", id:"orgin_img" %>
+           <label for="image_btn">
             <%= f.attachment_field :album_image, id: "image_btn" %>
-          </label>
-       
-          <h5>アーティスト名</h5>
-          <%= f.text_field :singer,placeholder: "アーティスト名入力" %>
-       
-          <h5>アルバム名</h5>
-          <%= f.text_field :album,placeholder: "アルバム名入力" %>
+           </label>
+        </div>
+            <table class="table">
+              <div class='col-xs-9'>
+                <tbody>
+                  <tr>
+                    <td><b>アーティスト名</b></td>
+                    <td><%= f.text_field :singer,placeholder: "アーティスト名入力" %></td>
+                  </tr>
+                  <tr>
+                    <td><b>アルバム名</b></td>
+                    <td><%= f.text_field :album,placeholder: "アルバム名入力" %></td>
+                  </tr>
+                  <tr>
+                  <td><b>ジャンル</b></td>
+                  <td><%= f.collection_select :genre_id, Genre.all, :id, :name, :include_blank => "-- 選択してください --" %></td>
+                  </tr>
 
-          <h5>ジャンル</h5>
-          <%= f.collection_select :genre_id, Genre.all, :id, :name, :include_blank => "-- 選択してください --" %>
-
-          <!-- 評価 -->
-          <div class="form-group row" id="star">
-            <%= f.label :rate,'評価', class:'col-md-1 col-form-label' %>
-            <%= f.hidden_field :rate, id: :review_star %>
-          </div>
-
-          <!-- 評価javascript -->
-          <script>
-          $('#star').raty({
-            size     : 36,
-            starOff:  '<%= asset_path('star-off.png') %>',
-            starOn : '<%= asset_path('star-on.png') %>',
-            starHalf: '<%= asset_path('star-half.png') %>',
-            scoreName: 'music[rate]',
-            half: true,
-          });
-          </script>
-
-          <h5>購入先またはYouTubeのURL</h5>
-          <%= f.text_area :url,placeholder: "URL入力" %>
-       
-          <h5>レビュー内容</h5>
-          <%= f.text_area :introduction,placeholder: "レビュー内容" %>
-
-          <%= f.submit '投稿する' %>
-      <% end %>
+                  <tr>
+                  <!-- 評価 -->
+                    <td>
+                      <div class="form-group row" id="star">
+                          <%= f.label :rate,'評価', class:'col-md-1 col-form-label' %>
+                          <%= f.hidden_field :rate, id: :review_star %>
+                      </div>
+                    </td>
+                    </tr>
+                  <tr>
+                    <td><b>YouTubeのURL</b></td>
+                    <td><%= f.text_area :url,placeholder: "URL入力" %></td>
+                  </tr>
+                  <tr>
+                    <td><b>レビュー内容</b></td>
+                    <td><%= f.text_area :introduction,placeholder: "レビュー内容" %></td>
+                  </tr>
+              </tbody>
+             </div>
+            </table>
+            <%= f.submit '投稿する',class: "btn btn-success col-xs-4 col-xs-offset-4" %>
+        <% end %>
 
       <script>
       $(function() {
@@ -96,5 +96,19 @@ musics#new
       });
       </script>
 
-    </div>
+      <!-- 評価javascript -->
+      <script>
+      $('#star').raty({
+        size     : 36,
+        starOff:  '<%= asset_path('star-off.png') %>',
+        starOn : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        scoreName: 'music[rate]',
+        half: true,
+      });
+      </script>
+
+<%= link_to "一覧へ戻る",musics_path, class: "btn btn-primary col-xs-4 col-xs-offset-4" %>
+
   </div>
+</div>
