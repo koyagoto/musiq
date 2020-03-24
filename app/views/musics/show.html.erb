@@ -1,77 +1,97 @@
 <div class="body">
   <div class="container">
-
-music#show
-<div class="row">
-<div class='col-xs-9'>
-      <h2>album detail</h2>
-      <table class="table table-striped" border="1">
-        <thead>
-          <tr>
-            <th>ユーザー</th>
-            <th>ジャケット</th>
-            <th>アルバム</th>
-            <th>アーティスト</th>
-            <th>ジャンル</th>
-            <th>コメント</th>
-            <th>視聴先URL</th>
-          </tr>
-        </thead>
-        <tbody>
-              <tr>
-                <td><%= link_to user_path(@music.user) do %>
-                        <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: 'no_image.jpeg' , size:'50x50' %>
-                        <%= @user.name %>
-                    <% end %>
-                </td>
-                <td>
-                    <%= attachment_image_tag @music, :album_image, :fill, 40, 40, format: 'jpg',fallback: "no_image.jpg" ,size:'50x50'%>
-                </td>
-                <td><%= @music.album %></td>
-                <td><%= @music.singer %></td>
-                <td><%= @music.genre.name %></td>
-                <td><%= @music.introduction %></td>
-                <td><%= Rinku.auto_link(@music.url, :all, 'target="_blank"').html_safe %></td>
-              </tr>
-        </tbody>
-      </table>
-</div>
-</div>
-
+          <div class='row'>
+            <div class='col-xs-3'>
+              <h1>User info</h1>
+                        <%= attachment_image_tag @user, :profile_image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpeg" ,size:'150x150'%>
+                    <table class="table">
+                        <tr>
+                            <td><p>name</p></td>
+                            <td><p><%= link_to @user.name,user_path(@user) %></p></td>
+                        </tr>
+                        <tr>
+                            <td><p>introduction</p></td>
+                            <td><p><%= @user.introduction %></p></td>
+                        </tr>
+                    </table>
+            </div>
+         <div class='col-xs-9'>
+              <table class="table">
+                <h1>Album</h1>
+                <tbody>
+                      <tr>
+                          <th>ジャケット:<h3><%= attachment_image_tag @music, :album_image, :fill, 200, 200, format: 'jpg',fallback: "no_image.jpg" ,size:'200x200'%></h3></th>
+                      </tr>
+                      <tr>
+                          <th>アルバム:<h3><%= @music.album %></h3></th>
+                      </tr>
+                      <tr>
+                          <th>アーティスト:<h3><%= @music.singer %></h3></th>
+                      </tr>
+                      <tr>
+                          <th>ジャンル:<h3><%= @music.genre.name %></h3></th>
+                      </tr>
+                      <tr>
+                        <th>評価:<h3><div id="star-rate-<%= @music.id %>"></h3></div>
+                        <script>
+                        $('#star-rate-<%= @music.id %>').raty({
+                          size: 36,
+                          starOff:  '<%= asset_path('star-off.png') %>',
+                          starOn : '<%= asset_path('star-on.png') %>',
+                          starHalf: '<%= asset_path('star-half.png') %>',
+                          half: true,
+                          readOnly: true,
+                          score: <%= @music.rate %>,
+                        });
+                        </script>
+                      <!--/星評価-->
+                        </th>
+                      </tr>
+                      <tr>
+                          <th>ユーザーコメント:<h3><%= @music.introduction %></h3></th>
+                      </tr>
+                      <tr>
+                          <th>視聴先URL:<h3><%= Rinku.auto_link(@music.url, :all, 'target="_blank"').html_safe %></h3></th>
+                      </tr>
+                </tbody>
+              </table>
+       </div>
+  <div class="text-right">
     <div class="favorite-link" id="favorite-link-<%= @music.id %>">
-     <%= render 'favorites/favorites', music:@music %>
+      <%= render 'favorites/favorites', music:@music %>
     </div>
+  </div>
 
 <!-- コメント機能 -->
-<div class="row">
-      <div class="comment-list bt style-2" id="comments">
-              <h2 class="comment-count"><%= @music.comments.count %>件コメント</h2>
-              <% @music.comments.each do |comment| %>
-                      <%= attachment_image_tag comment.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
-                      <%= comment.user.name %>
-                      <%= comment.created_at.strftime('%Y/%m/%d') %>
-                      <%= comment.comment %>
+    <div class="row">
+              <div class="comment-list bt style-2" id="comments">
+                  <h2 class="comment-count"><%= @music.comments.count %>件コメント</h2>
+                  <% @music.comments.each do |comment| %>
+                          <%= attachment_image_tag comment.user, :profile_image, :fill, 150, 150, fallback: "no_image.jpg",size:'100x100' %>
+                          <%= comment.user.name %>
+                          <%= comment.created_at.strftime('%Y/%m/%d') %>
+                          <h4><%= comment.comment %></h4>
+                  <% end %>
+              </div>
+
+              <div class="section-title-wrapper style-1 v1 mt-30" id="divAddComment">
+                <h3 class="section-title left">
+                  <span>コメント</span>
+                </h3>
+              </div>
+              <%= form_for [@music, @comment] do |f| %>
+              <div class="row">
+                 <div class="col-sm-12">
+                 <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+                 </div>
+              </div>
+              <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
               <% end %>
-          </div>
-
-          <div class="section-title-wrapper style-1 v1 mt-30" id="divAddComment">
-            <h3 class="section-title left">
-              <span>コメント</span>
-            </h3>
-          </div>
-          <%= form_for [@music, @comment] do |f| %>
-          <div class="row">
-             <div class="col-sm-12">
-             <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-             </div>
-          </div>
-          <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-          <% end %>
 
 
-      <%= link_to "Back",musics_path %>
-</div>
-<!-- ここまで -->
+          <%= link_to "一覧へ戻る",musics_path %>
+    </div>
+    <!-- ここまで -->
 
-</div>
+  </div>
 </div>

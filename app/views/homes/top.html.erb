@@ -1,9 +1,11 @@
-homes#top
-<% if user_signed_in? %>
-<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-ログイン中
-<%= link_to 'アバウト', homes_about_path %>
-<% else %>
-<%= link_to 'ログイン', new_user_session_path %>
-ログアウト中
-<% end %>
+
+
+<ul class="bxslider">
+<li><%= image_tag 'sample1.jpg', :width => '1450', :height => '500' %></li>
+<li><%= image_tag 'sample2.jpg', :width => '1450', :height => '500' %></li>
+<li><%= image_tag 'sample3.jpg', :width => '1450', :height => '500' %></li>
+<li><%= image_tag 'sample4.jpg', :width => '1450', :height => '500' %></li>
+<li><%= image_tag 'sample5.jpg', :width => '1450', :height => '500' %></li>
+</ul>
+
+<h2 align="center">さあ、音楽をシェアしよう。</h2>
