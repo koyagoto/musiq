@@ -14,7 +14,18 @@
                             <td><p><%= @user.introduction %></p></td>
                         </tr>
                     </table>
+
+                    <p><%= "フォロー数: #{@user.follower.count}" %></p>
+                    <p><%= "フォロワー数: #{@user.followed.count}" %></p>
+                    <% unless @user == current_user %>
+                       <% if current_user.following?(@user) %>
+                       <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST,class: "btn btn-danger" %>
+                       <% else %>
+                       <%= link_to 'フォローする', follow_path(@user.id), method: :POST,class: "btn btn-warning" %>
+                       <% end %>
+                    <% end %>
             </div>
+
          <div class='col-xs-9'>
               <table class="table">
                 <h1>Album</h1>
@@ -88,8 +99,6 @@
               <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
               <% end %>
 
-
-          <%= link_to "一覧へ戻る",musics_path %>
     </div>
     <!-- ここまで -->
 
