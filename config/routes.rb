@@ -6,11 +6,12 @@ Rails.application.routes.draw do
   get  'homes/about' => 'homes#about'
   post   '/favorite/:music_id' => 'favorites#favorite',   as: 'favorite'
   delete '/favorite/:music_id' => 'favorites#unfavorite', as: 'unfavorite'
+  post 'follow/:id' => 'relationships#follow', as: 'follow' # フォローする
+  post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow' # フォロー外す
 
   resources :musics do
   	resource :comments, only: [:create]
   end
-
   resources :users
 
 end

@@ -1,6 +1,6 @@
 <div class="body">
     <div class="container">
-
+ <div class='row'>
                 <div class='col-xs-3'>
                 <h1>User info</h1>
                         <%= attachment_image_tag @user, :profile_image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpeg" ,size:'150x150'%>
@@ -16,8 +16,8 @@
                     </table>
 
                     <% if @user.id == current_user.id %>
-                      <%= link_to '編集', edit_user_path(@user.id), class: "btn btn-warning btn-sm btn-block" %>
-                      <% end %>
+                          <%= link_to 'プロフィール編集', edit_user_path(@user.id), class: "btn btn-warning btn-sm btn-block" %>
+                    <% end %>
                 </div>
 
                 <div class='col-xs-9'>
@@ -37,7 +37,7 @@
                             <% @user.musics.each do |music| %>
                               <tr>
                                 <td><%= link_to user_path(music.user.id) do %>
-                                    <%= attachment_image_tag music, :album_image, :fill, 150, 150, format: 'jpeg', fallback: 'no_image.jpeg' , size:'50x50' %>
+                                    <%= attachment_image_tag music, :album_image, :fill, 150, 150, format: 'jpeg', fallback: 'no_image.jpeg' , size:'80x80' %>
                                         <% end %>
                                     </td>
                                 <td><%= link_to music.album,music_path(music) %></td>
@@ -51,6 +51,47 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+
+        <div class='row'>
+            <div class='col-xs-3'>
+                <p><%= "フォロー: #{@user.follower.count}" %></p>
+                <p><%= "フォロワー: #{@user.followed.count}" %></p>
+                <% unless @user == current_user %>
+                  <% if current_user.following?(@user) %>
+                    <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST,class: "btn btn-danger" %>
+                  <% else %>
+                    <%= link_to 'フォローする', follow_path(@user.id), method: :POST,class: "btn btn-warning" %>
+                  <% end %>
+                <% end %>
+          </div>
+          <div class='col-xs-9'>
+              <h3>フォロー一覧</h3>
+              <% @user.following_user.where.not(id: current_user.id).each do |user| %>
+                <p>
+                  <%= "ユーザー名: #{user.name}" %>
+                  <% if current_user.following?(user) %>
+                    <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST,class: "btn btn-danger btn-sm" %>
+                  <% else %>
+                    <%= link_to 'フォローする', follow_path(user.id), method: :POST,class: "btn btn-warning btn-sm" %>
+                  <% end %>
+                  <%= link_to "ユーザーページへ", user_path(user),class: "btn btn-default btn-sm" %>
+                </p>
+              <% end %>
+            <h3>フォロワー一覧</h3>
+              <% @user.follower_user.where.not(id: current_user.id).each do |user| %>
+                <p>
+                  <%= "ユーザー名: #{user.name}" %>
+                  <% if current_user.following?(user) %>
+                    <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST,class: "btn btn-danger btn-sm" %>
+                  <% else %>
+                    <%= link_to 'フォローする', follow_path(user.id), method: :POST,class: "btn btn-warning btn-sm" %>
+                  <% end %>
+                  <%= link_to "ユーザーページへ", user_path(user),class: "btn btn-default btn-sm" %>
+                </p>
+              <% end %>
+          </div>
+      </div>
 
   </div>
 </div>
