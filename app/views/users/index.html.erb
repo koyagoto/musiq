@@ -15,7 +15,7 @@
                     <% @users.each do |user| %>
                       <tr>
                         <td><%= attachment_image_tag user, :profile_image, :fill, 150, 150, format: 'jpeg', fallback: 'no_image.jpeg' , size:'100x100' %></td>
-                        <td><%= link_to user.name,user_path(user) %></td>
+                        <td><%= link_to user.name,user_path(user),:style=>"color:red;" %></td>
                         <td><%= user.introduction %></td>
                       </tr>
                     <% end %>
