@@ -1,13 +1,13 @@
 <div class="body">
   <div class="container">
 
-<button type="button" class="btn btn-default btn-lg"><%= link_to '新規投稿', new_music_path %></button>
+<button type="button" class="btn btn-default btn-lg"><%= link_to '新規投稿', new_music_path,:style=>"color:red;" %></button>
 
 
 <%= render '/musics/genre', genres: @genres %>
 
 <div class='col-xs-10'>
-      <h2>Musics</h2>
+      <h2>アルバム一覧</h2>
       <table class="table table-hover">
           <thead>
             <tr>
@@ -25,7 +25,7 @@
                     <%= attachment_image_tag music, :album_image, :fill, 150, 150, format: 'jpg',fallback: "no_image.jpg" ,size:'100x100'%>
                 </td>
                 <td><%= music.singer %></td>
-                <td><%= link_to music.album,music_path(music) %></td>
+                <td><%= link_to music.album,music_path(music),:style=>"color:red;" %></td>
                   <!--星評価-->
                 <td>
                   <div id="star-rate-<%= music.id %>"></div>

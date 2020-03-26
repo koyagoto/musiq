@@ -2,15 +2,15 @@
     <div class="container">
  <div class='row'>
                 <div class='col-xs-3'>
-                <h1>User info</h1>
+                <h1>ユーザー</h1>
                         <%= attachment_image_tag @user, :profile_image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpeg" ,size:'150x150'%>
                     <table class="table">
                         <tr>
-                            <td><p>name</p></td>
+                            <td><p>ユーザー名</p></td>
                             <td><p><%= @user.name%></p></td>
                         </tr>
                         <tr>
-                            <td><p>introduction</p></td>
+                            <td><p>プロフィール</p></td>
                             <td><p><%= @user.introduction%></p></td>
                         </tr>
                     </table>
@@ -21,7 +21,7 @@
                 </div>
 
                 <div class='col-xs-9'>
-                <h2>musics</h2>
+                <h2>投稿一覧</h2>
                     <table class="table">
                         <thead>
                             <tr>
@@ -40,7 +40,7 @@
                                     <%= attachment_image_tag music, :album_image, :fill, 150, 150, format: 'jpeg', fallback: 'no_image.jpeg' , size:'80x80' %>
                                         <% end %>
                                     </td>
-                                <td><%= link_to music.album,music_path(music) %></td>
+                                <td><%= link_to music.album,music_path(music),:style=>"color:red;" %></td>
                                 <td><%= music.singer %></td>
                                 <% if user_signed_in? && music.user_id == current_user.id %>
                                 <td><%= link_to '編集する', edit_music_path(music), class: "btn btn-primary" %></td>
