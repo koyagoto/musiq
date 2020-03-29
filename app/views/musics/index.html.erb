@@ -22,7 +22,7 @@
             <% @musics.each do |music|%>
               <tr>
                 <td>
-                    <%= attachment_image_tag music, :album_image, :fill, 150, 150, format: 'jpg',fallback: "no_image.jpg" ,size:'100x100'%>
+                    <%= attachment_image_tag music, :album_image, :fill, 150, 150, fallback: "no_image.jpg" ,size:'100x100'%>
                 </td>
                 <td><%= music.singer %></td>
                 <td><%= link_to music.album,music_path(music),:style=>"color:red;" %></td>
