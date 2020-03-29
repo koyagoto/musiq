@@ -1,24 +1,24 @@
-# README
+#サイト名
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ Music Research
 
-Things you may want to cover:
+## 使用バージョン
+- ruby 2.5.7
+- Rails 5.2.4.1
 
-* Ruby version
+## 概要
+ 自分の好きなアルバムを手軽にレビューでき、好きなユーザーがいたら、
+ フォローしたり、いいねできるサイト。
 
-* System dependencies
+## 機能一覧
+- いいね機能
+- フォロー機能
+- コメント機能
+- ジャンル検索機能
+- レビュー機能
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用方法
+1. ログインする。
+2. 好きなアルバムをレビューし投稿する。
+3. 自分の好きなユーザーの投稿にいいね、コメントをする
+4. 気が合いそうなユーザーはフォローして投稿をチェックする。
