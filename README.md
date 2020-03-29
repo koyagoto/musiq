@@ -1,6 +1,4 @@
-#サイト名
-
- Music Research
+# Music Research
 
 ## 使用バージョン
 - ruby 2.5.7
