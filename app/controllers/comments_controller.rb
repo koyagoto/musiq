@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
 		music = Music.find(params[:music_id])
 	    comment = current_user.comments.new(comment_params)
 	    comment.music_id = music.id
+	    comment.score = Language.get_data(comment_params[:comment])
 	    comment.save
 	    redirect_to music_path(music)
 	end
