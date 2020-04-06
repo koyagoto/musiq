@@ -84,3 +84,13 @@ gem 'rails-i18n'
 
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+
+gem 'dotenv-rails'
+
+gem 'font-awesome-sass', '~> 5.4.1'
+
+group :development, :test do
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'pry-doc'
+end
